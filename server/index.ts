@@ -8,9 +8,19 @@ import {
   updateTestCell,
   addItem,
   deleteRow,
-} from "./googleSheets";
+} from "./services/googleSheets";
 
 import { mapSheetRows } from "../shared/sheetMapper";
+
+import type { UpdateCellRequest } from "./types/api";
+
+import itemsRouter from "./routes/items";
+
+import updateRouter from "./routes/update";
+
+import addRouter from "./routes/add";
+import deleteRouter from "./routes/delete";
+import testRouter from "./routes/test";
 
 dotenv.config();
 
@@ -18,109 +28,20 @@ const app = express();
 
 console.log("SERVER VERSION 2");
 
-type UpdateCellRequest = {
-  id: number;
-  field: string;
-  value: string | number;
-};
+
 
 app.use(cors());
 app.use(express.json());
 
-app.get("/api/items", async (_, res) => {
-  try {
-    const rows = await getRows();
+app.use("/api/items", itemsRouter);
 
-    res.json(mapSheetRows(rows));
-  } catch (error) {
-    console.error(error);
+app.use("/api/test", testRouter);
 
-    res.status(500).json({
-      error: "Не удалось получить данные",
-    });
-  }
-});
+app.use("/api/update-cell", updateRouter);
 
-app.post("/api/test", async (_, res) => {
-  try {
-    await updateTestCell();
+app.use("/api/add-item", addRouter);
 
-    res.json({
-      success: true,
-    });
-  } catch (error) {
-    console.error(error);
-
-    res.status(500).json({
-      success: false,
-    });
-  }
-});
-
-
-app.post("/api/update-cell", async (req, res) => {
-  try {
-    const { id, field, value } =
-      req.body as UpdateCellRequest;
-
-    if (!id || !field) {
-      return res.status(400).json({
-        success: false,
-        error: "Не указан id или field",
-      });
-    }
-
-    await updateCell(id, field, value);
-
-    res.json({
-      success: true,
-    });
-  } catch (error) {
-    console.error(error);
-
-    res.status(500).json({
-      success: false,
-      error:
-        error instanceof Error
-          ? error.message
-          : "Неизвестная ошибка",
-    });
-  }
-});
-
-app.post("/api/add-item", async (req, res) => {
-  try {
-    const { values } = req.body;
-
-    await addItem(values);
-
-    res.json({
-      success: true,
-    });
-  } catch (error) {
-    console.error(error);
-
-    res.status(500).json({
-      success: false,
-    });
-  }
-});
-
-app.delete("/api/item/:id", async (req, res) => {
-  try {
-    await deleteRow(Number(req.params.id));
-
-    res.json({
-      success: true,
-    });
-  } catch (error) {
-    console.error(error);
-
-    res.status(500).json({
-      success: false,
-    });
-  }
-});
+app.use("/api/item", deleteRouter);
 
 
 const PORT = 3001;
