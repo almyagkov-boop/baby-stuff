@@ -2,6 +2,11 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+
+
 import {
   getRows,
   updateCell,
@@ -12,11 +17,21 @@ import {
 
 import { mapSheetRows } from "../shared/sheetMapper";
 
+
+
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const distPath = path.resolve(__dirname, "../dist");
+
+
 
 const app = express();
 
 console.log("SERVER VERSION 2");
+
 
 type UpdateCellRequest = {
   id: number;
@@ -26,6 +41,7 @@ type UpdateCellRequest = {
 
 app.use(cors());
 app.use(express.json());
+
 
 app.get("/api/items", async (_, res) => {
   try {
@@ -122,6 +138,11 @@ app.delete("/api/item/:id", async (req, res) => {
   }
 });
 
+app.use(express.static(distPath));
+
+app.get(/^\/(?!api).*/, (_, res) => {
+  res.sendFile(path.join(distPath, "index.html"));
+});
 
 const PORT = 3001;
 
