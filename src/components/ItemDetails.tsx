@@ -75,14 +75,19 @@ export default function ItemDetails({
 }
   
 return (
- <aside
+<aside
   className="
-    fixed inset-0 z-50 overflow-y-auto bg-white
-    lg:sticky lg:top-6
+    fixed inset-0 z-50
+    overflow-y-auto
+    bg-white
+
+    lg:sticky
+    lg:top-6
+    lg:h-fit
     lg:overflow-hidden
     lg:rounded-3xl
-    lg:border lg:border-slate-200
-    lg:bg-white
+    lg:border
+    lg:border-slate-200
     lg:shadow-lg
   "
 >

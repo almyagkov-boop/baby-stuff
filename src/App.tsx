@@ -237,17 +237,15 @@ const filteredItems = items
 
 </div>
 
-<div className="hidden lg:block">
+{selectedItem && (
+  <ItemDetails
+    item={selectedItem}
+    onClose={() => setSelectedItem(null)}
+    onSaved={reloadItems}
+  />
+)}
 
-  {selectedItem && (
-    <ItemDetails
-      item={selectedItem}
-      onClose={() => setSelectedItem(null)}
-      onSaved={reloadItems}
-    />
-  )}
 
-</div>
 
 </main>
     </div>
