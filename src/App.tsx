@@ -28,7 +28,17 @@ const [sortBy, setSortBy] = useState("priority");
 
   const [selectedItem, setSelectedItem] = useState<PurchaseItem | null>(null);
 
+useEffect(() => {
+  if (selectedItem) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "";
+  }
 
+  return () => {
+    document.body.style.overflow = "";
+  };
+}, [selectedItem]);
 
   useEffect(() => {
     async function load() {

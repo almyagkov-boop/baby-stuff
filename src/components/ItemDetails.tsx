@@ -75,7 +75,15 @@ export default function ItemDetails({
 }
   
 return (
+<>
+
+<div
+  className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm lg:hidden"
+  onClick={onClose}
+/>
+
 <aside
+  onClick={(e) => e.stopPropagation()}
   className="
     fixed inset-0 z-50
     overflow-y-auto
@@ -109,7 +117,13 @@ return (
 
     <button
       onClick={onClose}
-      className="rounded-lg p-2 transition hover:bg-slate-100"
+      className="
+rounded-xl
+p-3
+transition
+hover:bg-slate-100
+active:scale-95
+"
     >
       <X size={18} />
     </button>
@@ -394,5 +408,6 @@ return (
       </div>
 
     </aside>
+    </>
   );
 }
