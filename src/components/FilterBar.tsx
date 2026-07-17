@@ -44,49 +44,40 @@ const activeFilters =
   
 return (
     <>
+
+<div className="lg:hidden">
+  <button
+    onClick={() => setMobileOpen(!mobileOpen)}
+    className="flex w-full items-center justify-between rounded-xl border border-slate-300 bg-white px-4 py-3"
+  >
+    <div className="flex items-center gap-2">
+      <Filter size={18} />
+
+      <span>
+        Фильтры
+        {activeFilters > 0 && ` (${activeFilters})`}
+      </span>
+    </div>
+
+    <span>{mobileOpen ? "▲" : "▼"}</span>
+  </button>
+</div>
+
+
 <div
   className={`
     mt-3
-    grid
     gap-3
 
-    ${
-      mobileOpen
-        ? "grid-cols-1"
-        : "hidden"
-    }
+    ${mobileOpen ? "grid" : "hidden"}
+
+    grid-cols-1
 
     lg:mt-0
     lg:grid
     lg:grid-cols-5
   `}
 >
-
-<div className="lg:hidden">
-
-  <button
-    onClick={() => setMobileOpen(!mobileOpen)}
-    className="flex w-full items-center justify-between rounded-xl border border-slate-300 bg-white px-4 py-3"
-  >
-    <div className="flex items-center gap-2">
-
-      <Filter size={18} />
-
-      <span>
-
-        Фильтры
-
-        {activeFilters > 0 && ` (${activeFilters})`}
-
-      </span>
-
-    </div>
-
-    <span>{mobileOpen ? "▲" : "▼"}</span>
-
-  </button>
-
-</div>
 
       <select
         value={selectedCategory}
