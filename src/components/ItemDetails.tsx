@@ -75,10 +75,19 @@ export default function ItemDetails({
 }
   
 return (
-  <aside className="sticky top-6 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-lg">
- 
+ <aside
+  className="
+    fixed inset-0 z-50 overflow-y-auto bg-white
+    lg:sticky lg:top-6
+    lg:overflow-hidden
+    lg:rounded-3xl
+    lg:border lg:border-slate-200
+    lg:bg-white
+    lg:shadow-lg
+  "
+>
 
-<div className="border-b border-slate-100 p-4">
+<div className="sticky top-0 z-10 border-b border-slate-100 bg-white p-4">
 
 
 
@@ -148,7 +157,7 @@ return (
 
 </div>
 
-<div className="space-y-4 p-4">
+<div className="space-y-4 p-4 pb-24 lg:pb-4">
 
 
         <div className="flex">
@@ -322,7 +331,16 @@ return (
           </section>
         )}
 
-    <div className="mt-2 grid grid-cols-2 gap-2">
+<div
+  className="
+    sticky bottom-0
+    mt-4
+    grid grid-cols-2 gap-2
+    border-t border-slate-200
+    bg-white
+    py-4
+  "
+>
 
   <button
   onClick={async () => {
