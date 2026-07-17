@@ -1,6 +1,8 @@
 import type { PurchaseItem } from "../types/PurchaseItem";
 
-const API_URL = "http://localhost:3001";
+const API_URL = "";
+
+fetch(`${API_URL}/api/items`);
 
 export async function loadItems(): Promise<PurchaseItem[]> {
   const response = await fetch(`${API_URL}/api/items`);

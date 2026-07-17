@@ -1,4 +1,6 @@
-const API_URL = "http://localhost:3001";
+const API_URL = "";
+
+fetch(`${API_URL}/api/items`);
 
 type UpdatePayload = {
   id: number;
