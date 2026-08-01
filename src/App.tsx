@@ -29,6 +29,10 @@ const [sortBy, setSortBy] = useState("priority");
   const [selectedItem, setSelectedItem] = useState<PurchaseItem | null>(null);
 
 useEffect(() => {
+  if (window.innerWidth >= 1024) {
+    return;
+  }
+
   if (selectedItem) {
     document.body.style.overflow = "hidden";
   } else {
