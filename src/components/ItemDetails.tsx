@@ -89,9 +89,22 @@ return (
     overflow-y-auto
     bg-white
 
+    lg:relative
+    lg:inset-auto
+    lg:z-auto
+    lg:overflow-visible
+    lg:bg-transparent
+  "
+>
+
+  <div
+  className="
+    h-full
+    bg-white
+
     lg:sticky
     lg:top-6
-    lg:h-fit
+    lg:h-auto
     lg:overflow-hidden
     lg:rounded-3xl
     lg:border
@@ -404,6 +417,8 @@ active:scale-95
   </button>
 
 </div>
+
+      </div>
 
       </div>
 
